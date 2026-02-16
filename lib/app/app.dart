@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rancho_consciente/app/model/categoria_model.dart';
-import 'package:rancho_consciente/app/model/rancho_model.dart';
+import 'package:rancho_consciente/app/view_model/rancho_viewmodel.dart';
 
 class App extends StatelessWidget {
-  final List<RanchoModel> listasCompras = [
-    RanchoModel(
-      mercado: 'Mercado Dália',
-      data: DateTime.now(),
-      categorias: CategoriaModel.gerarCategoriasPadrao(),
-      descricao: 'Descricao detalhada',
-    ),
-  ];
+  final ranchoViewModel = RanchoViewmodel();
+
   App({super.key});
 
   @override
@@ -22,52 +15,49 @@ class App extends StatelessWidget {
         label: Text('Criar nova lista de compras'),
         icon: Icon(Icons.add_shopping_cart_outlined),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: const EdgeInsets.all(16),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        // Aqui a mágica acontece: transformamos dados em Widgets
-        children: listasCompras
-            .map(
-              (item) => Card(
-                color: Theme.of(
-                  context,
-                ).colorScheme.surface, // Usa o cinza escuro do seu tema
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        item.mercado,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        item.data.toString(),
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        item.descricao,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+      body: GridView.builder(
+        padding: const EdgeInsets.all(18),
+
+        itemCount: ranchoViewModel.listasCompras.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 2,
+          childAspectRatio: 0.8,
+        ),
+        itemBuilder: (context, index) {
+          final rancho = ranchoViewModel.listasCompras[index];
+          return Card(
+            color: Theme.of(
+              context,
+            ).colorScheme.surface, // Usa o cinza escuro do seu tema
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    rancho.mercado,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
+                  Text(
+                    rancho.data.toString(),
+                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    rancho.descricao,
+                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-            )
-            .toList(), // O map retorna um Iterable, o toList() converte de volta para a lista que o children quer
+            ),
+          );
+        },
       ),
     );
   }

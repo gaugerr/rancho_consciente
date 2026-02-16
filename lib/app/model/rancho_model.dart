@@ -2,7 +2,7 @@ import 'categoria_model.dart';
 
 class RanchoModel {
   String mercado;
-  DateTime data;
+  String data;
   String descricao;
   List<CategoriaModel> categorias;
 

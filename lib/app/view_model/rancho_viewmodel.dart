@@ -19,7 +19,7 @@ class RanchoViewmodel {
       mercado: 'Mercado Desco',
       data: '20/30/3212',
       categorias: CategoriaModel.gerarCategoriasPadrao(),
-      descricao: 'Rancho no mercadao desco',
+      descricao: 'Rancho no mercadao descooooooo',
     ),
   ];
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rancho_consciente/app/view_model/rancho_viewmodel.dart';
-import 'package:rancho_consciente/app/widgets/card_widget.dart';
+import 'package:rancho_consciente/app/widgets/cards/rancho_card.dart';
 
 class App extends StatelessWidget {
   final ranchoViewModel = RanchoViewmodel();

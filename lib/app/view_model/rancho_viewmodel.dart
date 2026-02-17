@@ -21,6 +21,19 @@ class RanchoViewmodel {
       categorias: CategoriaModel.gerarCategoriasPadrao(),
       descricao: 'Rancho no mercadao descooooooo',
     ),
+
+    RanchoModel(
+      mercado: 'Mercado Dália',
+      data: '20/02/2012',
+      categorias: CategoriaModel.gerarCategoriasPadrao(),
+      descricao: 'Descricao detalhada',
+    ),
+    RanchoModel(
+      mercado: 'Mercado Marel',
+      data: '10/20/2131',
+      categorias: CategoriaModel.gerarCategoriasPadrao(),
+      descricao: 'Descrição do rancho atual',
+    ),
   ];
 
   //TODO funções pra adicionar etc

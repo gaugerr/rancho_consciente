@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rancho_consciente/app/model/rancho_model.dart';
+import 'package:rancho_consciente/app/model/categoria_model.dart';
 
-class RanchoCard extends StatelessWidget {
-  final RanchoModel rancho;
-  const RanchoCard({super.key, required this.rancho});
+class CategoriasCard extends StatelessWidget {
+  final CategoriaModel categorias;
+  const CategoriasCard({super.key, required this.categorias});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,10 @@ class RanchoCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          //TODO navegaçao
+          // Navigator.push(
+          //   context,
+          //   CupertinoPageRoute(builder: (_) => CategoriasView()),
+          // );
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -22,19 +25,16 @@ class RanchoCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                rancho.mercado,
+                categorias.tituloCategoria,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                rancho.data.toString(),
-                style: const TextStyle(color: Colors.white70, fontSize: 12),
-              ),
+
               const SizedBox(height: 4),
               Text(
-                rancho.descricao,
+                categorias.itens.toString(),
                 style: const TextStyle(color: Colors.white, fontSize: 10),
                 textAlign: TextAlign.center,
               ),

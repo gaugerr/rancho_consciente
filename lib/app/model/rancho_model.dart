@@ -1,12 +1,14 @@
 import 'categoria_model.dart';
 
 class RanchoModel {
+  String id;
   String mercado;
   String data;
   String descricao;
   List<CategoriaModel> categorias;
 
   RanchoModel({
+    required this.id,
     required this.mercado,
     required this.data,
     required this.categorias,

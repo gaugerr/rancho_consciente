@@ -22,13 +22,12 @@ class CategoriaModel {
   // Lista Estática com as 5 categorias padrão
   static List<CategoriaModel> gerarCategoriasPadrao() {
     return [
-      CategoriaModel(tituloCategoria: 'Essencias', itens: []),
-      CategoriaModel(tituloCategoria: 'Higiene e Limpeza', itens: []),
+      CategoriaModel(tituloCategoria: 'Essenciais', itens: []),
       CategoriaModel(tituloCategoria: 'Hortifruti', itens: []),
+      CategoriaModel(tituloCategoria: 'Higiene e Limpeza', itens: []),
       CategoriaModel(tituloCategoria: 'Padaria e Laticínios', itens: []),
-      CategoriaModel(tituloCategoria: 'Carnes', itens: []),
-      CategoriaModel(tituloCategoria: 'Bebidas', itens: []),
-      CategoriaModel(tituloCategoria: 'Diversos', itens: []),
+      CategoriaModel(tituloCategoria: 'Carnes e Bebidas', itens: []),
+      CategoriaModel(tituloCategoria: 'Outros', itens: []),
     ];
   }
 }

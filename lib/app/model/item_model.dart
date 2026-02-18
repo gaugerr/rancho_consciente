@@ -1,7 +1,7 @@
 class ItemModel {
-  String id;
-  String nomeItem;
-  double preco;
+  final String id;
+  final String nomeItem;
+  final double preco;
   bool isComprado;
 
   ItemModel({

@@ -1,8 +1,8 @@
 import 'item_model.dart';
 
 class CategoriaModel {
-  String tituloCategoria;
-  List<ItemModel> itens;
+  final String tituloCategoria;
+  final List<ItemModel> itens;
   bool isExpandida;
 
   CategoriaModel({

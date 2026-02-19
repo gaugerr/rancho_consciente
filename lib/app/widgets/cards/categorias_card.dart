@@ -34,7 +34,7 @@ class CategoriasCard extends StatelessWidget {
 
               const SizedBox(height: 4),
               Text(
-                categorias.itens.toString(),
+                'Itens: ${categorias.itens}',
                 style: const TextStyle(color: Colors.white, fontSize: 10),
                 textAlign: TextAlign.center,
               ),

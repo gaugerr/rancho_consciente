@@ -28,6 +28,7 @@ class RanchoCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Text('id = ${rancho.id}'),
               Text(
                 rancho.mercado,
                 style: TextStyle(
@@ -36,7 +37,8 @@ class RanchoCard extends StatelessWidget {
                 ),
               ),
               Text(
-                rancho.data.toString(),
+                //  rancho.data.toString(),
+                "${rancho.data.day.toString().padLeft(2, '0')}/${rancho.data.month.toString().padLeft(2, '0')}/${rancho.data.year}",
                 style: const TextStyle(color: Colors.white70, fontSize: 12),
               ),
               const SizedBox(height: 4),

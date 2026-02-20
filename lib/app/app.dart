@@ -6,7 +6,7 @@ import 'package:rancho_consciente/app/widgets/cards/rancho_card.dart';
 import 'package:rancho_consciente/app/widgets/grid_builder.dart';
 
 class App extends StatelessWidget {
-  final ranchoViewModel = RanchoViewmodel();
+  final ranchoViewModel = RanchoViewModel();
 
   App({super.key});
 
@@ -16,16 +16,24 @@ class App extends StatelessWidget {
       appBar: AppBar(centerTitle: true, title: Text('Rancho Consciente')),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          ShowBottomSheet.bottomSheet(context, AddRanchoForms());
+          ShowBottomSheet.bottomSheet(
+            context,
+            AddRanchoForms(viewModel: ranchoViewModel),
+          );
         },
         label: Text('Criar nova lista de compras'),
         icon: Icon(Icons.add_shopping_cart_outlined),
       ),
-      body: MyGridBuilder(
-        itemCount: ranchoViewModel.listasCompras.length,
-        itemBuilder: (context, index) {
-          final rancho = ranchoViewModel.listasCompras[index];
-          return RanchoCard(rancho: rancho);
+      body: ListenableBuilder(
+        listenable: ranchoViewModel,
+        builder: (context, child) {
+          return MyGridBuilder(
+            itemCount: ranchoViewModel.listasCompras.length,
+            itemBuilder: (context, index) {
+              final rancho = ranchoViewModel.listasCompras[index];
+              return RanchoCard(rancho: rancho);
+            },
+          );
         },
       ),
     );

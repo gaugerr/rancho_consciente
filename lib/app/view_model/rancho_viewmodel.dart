@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:rancho_consciente/app/model/categoria_model.dart';
 import 'package:rancho_consciente/app/model/rancho_model.dart';
 
-class RanchoViewmodel {
+class RanchoViewModel extends ChangeNotifier {
   final List<RanchoModel> listasCompras = [];
 
   void adicionarRancho({
@@ -18,5 +19,7 @@ class RanchoViewmodel {
         descricao: descricao,
       ),
     );
+
+    notifyListeners();
   }
 }

@@ -3,15 +3,14 @@ import 'package:rancho_consciente/app/utils/utils.dart';
 import 'package:rancho_consciente/app/view_model/rancho_viewmodel.dart';
 
 class AddRanchoForms extends StatefulWidget {
-  const AddRanchoForms({super.key});
+  final RanchoViewModel viewModel;
+  const AddRanchoForms({super.key, required this.viewModel});
 
   @override
   State<AddRanchoForms> createState() => _AddRanchoFormsState();
 }
 
 class _AddRanchoFormsState extends State<AddRanchoForms> {
-  final ranchoViewModel = RanchoViewmodel();
-
   // Chave global para o formulário, essencial para acionar a validação
   final _formKey = GlobalKey<FormState>();
 
@@ -118,12 +117,12 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
                   // O validate() dispara todos os validadores de uma vez
                   if (_formKey.currentState!.validate()) {
                     // Se caiu aqui, todos os campos estão OK!
-                    ranchoViewModel.adicionarRancho(
+                    widget.viewModel.adicionarRancho(
                       nomeMercado: _nameController.text,
                       data: AppUtils.converterData(_dateController.text),
                       descricao: _descriptionController.text,
                     );
-                    print('RANCHO ADICIONADO');
+
                     Navigator.pop(context);
                   } else {
                     // Se caiu aqui, o Flutter automaticamente mostra os erros em vermelho

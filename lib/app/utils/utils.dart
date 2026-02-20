@@ -13,4 +13,13 @@ class AppUtils {
       confirmText: 'Selecionar',
     );
   }
+
+  static DateTime converterData(String dataString) {
+    List<String> partes = dataString.split('/'); // Divide em [19, 02, 2026]
+    return DateTime(
+      int.parse(partes[2]), // Ano
+      int.parse(partes[1]), // Mês
+      int.parse(partes[0]), // Dia
+    );
+  }
 }

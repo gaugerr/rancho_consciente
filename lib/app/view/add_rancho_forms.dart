@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rancho_consciente/app/utils/date_picker.dart';
+import 'package:rancho_consciente/app/utils/utils.dart';
+import 'package:rancho_consciente/app/view_model/rancho_viewmodel.dart';
 
 class AddRanchoForms extends StatefulWidget {
   const AddRanchoForms({super.key});
@@ -9,6 +10,8 @@ class AddRanchoForms extends StatefulWidget {
 }
 
 class _AddRanchoFormsState extends State<AddRanchoForms> {
+  final ranchoViewModel = RanchoViewmodel();
+
   // Chave global para o formulário, essencial para acionar a validação
   final _formKey = GlobalKey<FormState>();
 
@@ -43,12 +46,18 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
           padding: EdgeInsets.all(30),
 
           // color: Colors.deepPurpleAccent,
-          height: 400,
+          height: 430,
           child: Column(
             spacing: 20,
             children: [
               Text('Criar lista de compras'),
               TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, digite o nome do mercado';
+                  }
+                  return null;
+                },
                 controller: _nameController,
                 //style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
@@ -59,6 +68,12 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
                 ),
               ),
               TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, selecione uma data';
+                  }
+                  return null;
+                },
                 controller: _dateController,
                 readOnly: true,
 
@@ -76,6 +91,13 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
                 },
               ),
               TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, digite uma descrição';
+                  }
+                  return null;
+                },
+
                 controller: _descriptionController,
                 decoration: InputDecoration(
                   hint: Text(
@@ -92,7 +114,21 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
 
                   backgroundColor: Colors.deepPurpleAccent,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  // O validate() dispara todos os validadores de uma vez
+                  if (_formKey.currentState!.validate()) {
+                    // Se caiu aqui, todos os campos estão OK!
+                    ranchoViewModel.adicionarRancho(
+                      nomeMercado: _nameController.text,
+                      data: AppUtils.converterData(_dateController.text),
+                      descricao: _descriptionController.text,
+                    );
+                    print('RANCHO ADICIONADO');
+                    Navigator.pop(context);
+                  } else {
+                    // Se caiu aqui, o Flutter automaticamente mostra os erros em vermelho
+                  }
+                },
                 child: Text('Criar', style: TextStyle(color: Colors.white)),
               ),
             ],

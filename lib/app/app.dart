@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rancho_consciente/app/view/add_rancho_forms.dart';
 import 'package:rancho_consciente/app/view_model/rancho_viewmodel.dart';
 import 'package:rancho_consciente/app/widgets/bottom_sheet.dart';
 import 'package:rancho_consciente/app/widgets/cards/rancho_card.dart';
@@ -15,13 +16,7 @@ class App extends StatelessWidget {
       appBar: AppBar(centerTitle: true, title: Text('Rancho Consciente')),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          showModalBottomSheet(
-            isScrollControlled: true,
-            context: context,
-            builder: (context) {
-              return BottomSheetAdd();
-            },
-          );
+          ShowBottomSheet.bottomSheet(context, AddRanchoForms());
         },
         label: Text('Criar nova lista de compras'),
         icon: Icon(Icons.add_shopping_cart_outlined),

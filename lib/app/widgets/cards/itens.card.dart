@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rancho_consciente/app/model/item_model.dart';
 
-class ItemRow extends StatelessWidget {
+class ItemCard extends StatelessWidget {
   final ItemModel itemModel;
-  const ItemRow({super.key, required this.itemModel});
+  const ItemCard({super.key, required this.itemModel});
 
   @override
   Widget build(BuildContext context) {

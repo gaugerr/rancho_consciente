@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:rancho_consciente/app/model/rancho_model.dart';
+import 'package:rancho_consciente/app/view_model/rancho_viewmodel.dart';
 import 'package:rancho_consciente/app/widgets/cards/categorias_card.dart';
 import 'package:rancho_consciente/app/widgets/grid_builder.dart';
 
 class CategoriasView extends StatelessWidget {
+  final RanchoViewModel ranchoViewModel;
   final RanchoModel ranchoModel;
-  const CategoriasView({super.key, required this.ranchoModel});
+  const CategoriasView({
+    super.key,
+    required this.ranchoModel,
+    required this.ranchoViewModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,10 @@ class CategoriasView extends StatelessWidget {
         itemCount: ranchoModel.categorias.length,
         itemBuilder: (context, index) {
           final categorias = ranchoModel.categorias[index];
-          return CategoriasCard(categorias: categorias);
+          return CategoriasCard(
+            ranchoViewModel: ranchoViewModel,
+            categorias: categorias,
+          );
         },
       ),
     );

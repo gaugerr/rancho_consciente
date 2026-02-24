@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rancho_consciente/app/model/categoria_model.dart';
+import 'package:rancho_consciente/app/model/item_model.dart';
 import 'package:rancho_consciente/app/model/rancho_model.dart';
 
 class RanchoViewModel extends ChangeNotifier {
@@ -22,6 +23,14 @@ class RanchoViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  //TODO
-  void adicionarItem() {}
+  void adicionarItem(CategoriaModel categoria, String nomeDigitado) {
+    final novoItem = ItemModel(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      nomeItem: nomeDigitado,
+    );
+
+    categoria.itens.add(novoItem);
+
+    notifyListeners();
+  }
 }

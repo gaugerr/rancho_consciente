@@ -2,10 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rancho_consciente/app/model/rancho_model.dart';
 import 'package:rancho_consciente/app/view/categorias_view.dart';
+import 'package:rancho_consciente/app/view_model/rancho_viewmodel.dart';
 
 class RanchoCard extends StatelessWidget {
+  final RanchoViewModel ranchoViewModel;
   final RanchoModel rancho;
-  const RanchoCard({super.key, required this.rancho});
+  const RanchoCard({
+    super.key,
+    required this.rancho,
+    required this.ranchoViewModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,10 @@ class RanchoCard extends StatelessWidget {
           Navigator.push(
             context,
             CupertinoPageRoute(
-              builder: (_) => CategoriasView(ranchoModel: rancho),
+              builder: (_) => CategoriasView(
+                ranchoViewModel: ranchoViewModel,
+                ranchoModel: rancho,
+              ),
             ),
           );
         },

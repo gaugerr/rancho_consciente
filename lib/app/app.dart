@@ -32,7 +32,10 @@ class App extends StatelessWidget {
             itemCount: ranchoViewModel.listasCompras.length,
             itemBuilder: (context, index) {
               final rancho = ranchoViewModel.listasCompras[index];
-              return RanchoCard(rancho: rancho);
+              return RanchoCard(
+                ranchoViewModel: ranchoViewModel,
+                rancho: rancho,
+              );
             },
           );
         },

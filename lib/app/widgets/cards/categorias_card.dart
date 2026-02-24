@@ -46,11 +46,11 @@ class CategoriasCard extends StatelessWidget {
               ),
 
               const SizedBox(height: 4),
-              Text(
-                'Itens: ${categorias.itens}',
-                style: const TextStyle(color: Colors.white, fontSize: 10),
-                textAlign: TextAlign.center,
-              ),
+              // Text(
+              //   'Itens: ${categorias.itens}',
+              //   style: const TextStyle(color: Colors.white, fontSize: 10),
+              //   textAlign: TextAlign.center,
+              // ),
             ],
           ),
         ),

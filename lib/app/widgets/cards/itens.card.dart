@@ -7,10 +7,6 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Row(
-        children: [Text(itemModel.nomeItem), Text('${itemModel.preco}')],
-      ),
-    );
+    return Card(child: Row(children: [Text(itemModel.nomeItem)]));
   }
 }

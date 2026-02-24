@@ -23,7 +23,7 @@ class RanchoViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void adicionarItem(CategoriaModel categoria, String nomeDigitado) {
+  void adicionarItem({required categoria, required nomeDigitado}) {
     final novoItem = ItemModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       nomeItem: nomeDigitado,

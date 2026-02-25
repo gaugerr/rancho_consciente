@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rancho_consciente/app/model/categoria_model.dart';
 import 'package:rancho_consciente/app/view_model/rancho_viewmodel.dart';
 import 'package:rancho_consciente/app/widgets/cards/itens.card.dart';
-import 'package:rancho_consciente/app/widgets/grid_builder.dart';
+import 'package:rancho_consciente/app/widgets/list_view_builder.dart';
 
 class ItensView extends StatefulWidget {
   final RanchoViewModel ranchoViewModel;
@@ -60,8 +60,7 @@ class _ItensViewState extends State<ItensView> {
           Expanded(
             child: ListenableBuilder(
               listenable: widget.ranchoViewModel,
-              builder: (context, child) => MyGridBuilder(
-                colunas: 1,
+              builder: (context, child) => MyListViewBuilder(
                 itemCount: widget.categoriaModel.itens.length,
                 itemBuilder: (context, index) {
                   final itemAtual = widget.categoriaModel.itens[index];

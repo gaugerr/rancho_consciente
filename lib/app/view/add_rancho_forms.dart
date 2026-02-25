@@ -20,7 +20,7 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
   final TextEditingController _descriptionController = TextEditingController();
 
   // Variável para controlar o estado de carregamento/processamento do botão
-  final bool _isProcessing = false;
+  //final bool _isProcessing = false;
 
   @override
   void dispose() {
@@ -51,9 +51,12 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
             children: [
               Text('Criar lista de compras'),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor, digite o nome do mercado';
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Digite o nome do mercado';
+                  } else if (value.length > 30) {
+                    return 'O nome não pode exceder 30 caracteres';
                   }
                   return null;
                 },
@@ -67,6 +70,7 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
                 ),
               ),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, selecione uma data';
@@ -90,13 +94,15 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
                 },
               ),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return 'Por favor, digite uma descrição';
+                  } else if (value.length > 50) {
+                    return 'A descrição pode exceder 50 caracteres';
                   }
                   return null;
                 },
-
                 controller: _descriptionController,
                 decoration: InputDecoration(
                   hint: Text(
@@ -118,9 +124,9 @@ class _AddRanchoFormsState extends State<AddRanchoForms> {
                   if (_formKey.currentState!.validate()) {
                     // Se caiu aqui, todos os campos estão OK!
                     widget.viewModel.adicionarRancho(
-                      nomeMercado: _nameController.text,
+                      nomeMercado: _nameController.text.trim(),
                       data: AppUtils.converterData(_dateController.text),
-                      descricao: _descriptionController.text,
+                      descricao: _descriptionController.text.trim(),
                     );
 
                     Navigator.pop(context);

@@ -39,22 +39,37 @@ class _ItensViewState extends State<ItensView> {
       ),
       body: Column(
         children: [
-          TextFormField(
-            decoration: InputDecoration(hint: Text('Adicionar item')),
-            focusNode: _focusNode,
-            // key: _formKey,
-            controller: _nameItemController,
-            onFieldSubmitted: (value) {
-              if (value.isNotEmpty) {
-                widget.ranchoViewModel.adicionarItem(
-                  categoria: widget.categoriaModel,
-                  nomeDigitado: value, // Aqui usamos o 'value'
-                );
-                _nameItemController
-                    .clear(); // Aqui usamos o controller para resetar o campo
-                _focusNode.requestFocus();
-              }
-            },
+          Form(
+            key: _formKey,
+            child: TextFormField(
+              controller: _nameItemController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Digite um item';
+                } else if (value.length > 50) {
+                  return 'O item não pode exceder 50 caracteres';
+                }
+                return null;
+              },
+              decoration: InputDecoration(hintText: 'Adicionar item'),
+              focusNode: _focusNode,
+
+              onFieldSubmitted: (value) {
+                if (_formKey.currentState!.validate()) {
+                  widget.ranchoViewModel.adicionarItem(
+                    categoria: widget.categoriaModel,
+                    nomeDigitado: value.trim(),
+                  );
+                  _nameItemController.clear(); //limpa o campo ao dar enter
+                  _formKey.currentState!
+                      .reset(); //reseta a mensagem de erro do campo
+                  _focusNode.requestFocus(); //mantém o teclado na tela
+                } else {
+                  // mostra erros se a validação falhar
+                }
+              },
+            ),
           ),
 
           Expanded(

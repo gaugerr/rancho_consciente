@@ -4,7 +4,15 @@ import 'package:rancho_consciente/app/model/item_model.dart';
 import 'package:rancho_consciente/app/model/rancho_model.dart';
 
 class RanchoViewModel extends ChangeNotifier {
-  final List<RanchoModel> listasCompras = [];
+  final List<RanchoModel> listasCompras = [
+    RanchoModel(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      mercado: 'Marel',
+      data: DateTime.now(),
+      categorias: CategoriaModel.gerarCategoriasPadrao(),
+      descricao: 'teste',
+    ),
+  ];
 
   void adicionarRancho({
     required String nomeMercado,

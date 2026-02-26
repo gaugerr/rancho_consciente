@@ -1,9 +1,9 @@
 class ItemModel {
   final String id;
   final String nomeItem;
-  final double preco;
-  final double quantidade;
-  final String unidade;
+  double preco;
+  double quantidade;
+  String unidade;
   bool isComprado;
 
   ItemModel({

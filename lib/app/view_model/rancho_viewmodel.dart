@@ -50,7 +50,7 @@ class RanchoViewModel extends ChangeNotifier {
   double calcularTotalCategoria(CategoriaModel categoria) {
     double totalCategoria = categoria.itens
         .where((item) => item.isComprado)
-        .fold(0.0, (soma, item) => soma + (item.preco * item.quantidade));
+        .fold(0.0, (soma, item) => soma + calcularTotalItem(item));
     notifyListeners();
     return totalCategoria;
   }

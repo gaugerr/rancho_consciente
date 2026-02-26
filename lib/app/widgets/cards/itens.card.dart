@@ -56,12 +56,11 @@ class _ItemCardState extends State<ItemCard> {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Checkbox(
                   value: widget.itemModel.isComprado,
@@ -80,6 +79,12 @@ class _ItemCardState extends State<ItemCard> {
                         : TextDecoration.none,
                   ),
                 ),
+                Spacer(),
+                if (widget.itemModel.isComprado) ...[
+                  Text(
+                    'Total: R\$ ${widget.itemModel.preco.toStringAsFixed(2)}',
+                  ),
+                ],
               ],
             ),
             Form(

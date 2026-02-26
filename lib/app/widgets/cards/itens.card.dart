@@ -112,7 +112,14 @@ class _ItemCardState extends State<ItemCard> {
                             child: Text(value),
                           );
                         }).toList(),
-                        onChanged: (novoValor) {},
+                        onChanged: (value) {
+                          if (value != null && value.isNotEmpty) {
+                            widget.ranchoViewModel.atualizarUnidadeItem(
+                              widget.itemModel,
+                              value,
+                            );
+                          }
+                        },
                       ),
                     ),
                     Expanded(

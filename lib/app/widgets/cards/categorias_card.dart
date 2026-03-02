@@ -15,96 +15,111 @@ class CategoriasCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(
-        context,
-      ).colorScheme.surface, // Usa o cinza escuro do seu tema
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: () {
-          Navigator.push(
-            context,
-            CupertinoPageRoute(
-              builder: (_) => ItensView(
-                ranchoViewModel: ranchoViewModel,
-                categoriaModel: categorias,
-              ),
+    return ListenableBuilder(
+      listenable: ranchoViewModel,
+      builder: (context, child) {
+        return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(
+              color: ranchoViewModel.isCategoriaCompleta(categorias)
+                  ? Colors.green
+                  : Colors.transparent,
             ),
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                categorias.tituloCategoria,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
+          ),
+          color: Theme.of(
+            context,
+          ).colorScheme.surface, // Usa o cinza escuro do seu tema
+          child: InkWell(
+            borderRadius: BorderRadius.circular(12),
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (_) => ItensView(
+                    ranchoViewModel: ranchoViewModel,
+                    categoriaModel: categorias,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 30),
-              ListenableBuilder(
-                listenable: ranchoViewModel,
-                builder: (context, child) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 6,
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    categorias.tituloCategoria,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.black26,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.white60, width: 1),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ...ranchoViewModel
-                            .getListaItens(categorias)
-                            .take(4)
-                            .map(
-                              (nome) => Padding(
-                                padding: const EdgeInsets.only(bottom: 2),
-                                child: Text(
-                                  "• $nome", // Um bullet point ajuda na leitura
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 14,
+                  ),
+                  const SizedBox(height: 30),
+                  ListenableBuilder(
+                    listenable: ranchoViewModel,
+                    builder: (context, child) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black26,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.white60, width: 1),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ...ranchoViewModel
+                                .getListaItens(categorias)
+                                .take(4)
+                                .map(
+                                  (nome) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 2),
+                                    child: Text(
+                                      "• $nome", // Um bullet point ajuda na leitura
+                                      style: TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 14,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
+                                ),
+
+                            if (ranchoViewModel
+                                    .getListaItens(categorias)
+                                    .length >
+                                4)
+                              Text(
+                                "+ ${ranchoViewModel.getListaItens(categorias).length - 4} itens...",
+                                style: TextStyle(
+                                  color: Colors.deepPurpleAccent,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
 
-                        if (ranchoViewModel.getListaItens(categorias).length >
-                            4)
-                          Text(
-                            "+ ${ranchoViewModel.getListaItens(categorias).length - 4} itens...",
-                            style: TextStyle(
-                              color: Colors.deepPurpleAccent,
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                      ],
-                    ),
-                  );
-                },
+                  const SizedBox(height: 4),
+                  // Text(
+                  //   'Itens: ${categorias.itens}',
+                  //   style: const TextStyle(color: Colors.white, fontSize: 10),
+                  //   textAlign: TextAlign.center,
+                  // ),
+                ],
               ),
-
-              const SizedBox(height: 4),
-              // Text(
-              //   'Itens: ${categorias.itens}',
-              //   style: const TextStyle(color: Colors.white, fontSize: 10),
-              //   textAlign: TextAlign.center,
-              // ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

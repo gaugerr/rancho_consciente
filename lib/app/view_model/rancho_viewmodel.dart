@@ -42,6 +42,10 @@ class RanchoViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<String> getListaItens(CategoriaModel categoria) {
+    return categoria.itens.map((item) => item.nomeItem).toList();
+  }
+
   void toggleIsComprado(ItemModel item) {
     item.isComprado = !item.isComprado;
     notifyListeners();

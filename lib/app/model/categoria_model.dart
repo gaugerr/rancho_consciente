@@ -12,8 +12,8 @@ class CategoriaModel {
   CategoriaModel({
     this.id,
     required this.tituloCategoria,
-    this.itens = const [],
-  });
+    List<ItemModel>? itens, // opcional e que aceita null
+  }) : itens = itens ?? []; // Se for null, cria uma lista nova e mutável
 
   double get totalCategoria {
     return itens.fold(0.0, (soma, item) => soma + item.preco);

@@ -153,4 +153,18 @@ class DatabaseHelper {
       return null; // Caso o ID não exista
     }
   }
+
+  // BUSCA AS CATEGORIAS LIGADAS A UM RANCHO ESPECIFICO
+  Future<List<CategoriaModel>> getCategoriasPorRancho(int ranchoId) async {
+    final db = await instance.database;
+
+    // Filtramos a tabela categorias onde o ranchoId seja igual ao ID passado
+    final result = await db.query(
+      'categorias',
+      where: 'ranchoId = ?',
+      whereArgs: [ranchoId],
+    );
+
+    return result.map((json) => CategoriaModel.fromMap(json)).toList();
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:path/path.dart';
 import 'package:rancho_consciente/app/model/categoria_model.dart';
+import 'package:rancho_consciente/app/model/item_model.dart';
 import 'package:rancho_consciente/app/model/rancho_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -166,5 +167,22 @@ class DatabaseHelper {
     );
 
     return result.map((json) => CategoriaModel.fromMap(json)).toList();
+  }
+
+  // BUSCA OS ITENS DE UMA CATEGORIA ESPECÍFICA
+  Future<List<ItemModel>> getItensPorCategoria(int categoriaId) async {
+    // 1. Obtém a instância do banco de dados
+    final db = await instance.database;
+
+    // 2. Faz a consulta filtrando pelo ID da categoria
+    final result = await db.query(
+      'itens',
+      where: 'categoriaId = ?',
+      whereArgs: [categoriaId],
+      orderBy: 'comprado ASC, id ASC',
+    );
+
+    // 3. Converte os mapas vindos do banco para objetos Dart
+    return result.map((json) => ItemModel.fromMap(json)).toList();
   }
 }

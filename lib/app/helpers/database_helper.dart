@@ -189,4 +189,21 @@ class DatabaseHelper {
     // 3. Converte os mapas vindos do banco para objetos Dart
     return result.map((json) => ItemModel.fromMap(json)).toList();
   }
+
+  // ATUALIZA O ITEM INTEIRO
+  Future<int> updateItem(ItemModel item) async {
+    final db = await instance.database;
+    return await db.update(
+      'itens',
+      item.toMap(),
+      where: 'id = ?',
+      whereArgs: [item.id],
+    );
+  }
+
+  // DELETA UM ITEM
+  Future<int> deleteItem(int id) async {
+    final db = await instance.database;
+    return await db.delete('itens', where: 'id = ?', whereArgs: [id]);
+  }
 }

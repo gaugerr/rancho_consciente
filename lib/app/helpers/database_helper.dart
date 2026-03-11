@@ -128,4 +128,29 @@ class DatabaseHelper {
     // 3. Converte a lista de Mapas para uma lista de Objetos RanchoModel
     return result.map((json) => RanchoModel.fromMap(json)).toList();
   }
+
+  // BUSCAR UM RANCHO ESPECIFIC0 PELO ID
+  Future<RanchoModel?> getRanchoById(int id) async {
+    // 1. Acessa a instância do banco
+    final db = await instance.database;
+
+    // 2. Realiza a busca com um filtro (WHERE)
+    final maps = await db.query(
+      'ranchos',
+      columns: [
+        'id',
+        'nome',
+        'dataCriacao',
+      ], // Especifica as colunas por segurança
+      where: 'id = ?', // O '?' previne SQL Injection
+      whereArgs: [id], // O valor que substituirá o '?'
+    );
+
+    // 3. Verifica se encontrou algo
+    if (maps.isNotEmpty) {
+      return RanchoModel.fromMap(maps.first);
+    } else {
+      return null; // Caso o ID não exista
+    }
+  }
 }

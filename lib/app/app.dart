@@ -27,6 +27,9 @@ class App extends StatelessWidget {
       body: ListenableBuilder(
         listenable: ranchoViewModel,
         builder: (context, child) {
+          /*TO DO implementar um future builder, que vai receber a função 
+          gettAllRanchos da database */
+
           return MyGridBuilder(
             colunas: 2,
             itemCount: ranchoViewModel.listasCompras.length,
